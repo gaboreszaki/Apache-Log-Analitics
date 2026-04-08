@@ -4,6 +4,9 @@ A powerful CLI-based tool designed to parse and analyze Apache HTTP Server logs 
 
 ## Features
 
+- **Time-Period Analysis**: 
+  - Summary views for **Total**, **Current Month**, and **Last Month**.
+  - Flexible filtering using CLI arguments.
 - **Multi-Log Support**: Automatically detects and processes `access.log` and `error.log` files, including compressed `.gz` archives.
 - **VHost Awareness**: Supports standard Apache log formats and "other_vhosts_access.log" with vhost:port prefixes.
 - **Traffic Statistics**: 
@@ -13,14 +16,15 @@ A powerful CLI-based tool designed to parse and analyze Apache HTTP Server logs 
   - Top 5 requested paths and referrers.
 - **Download Tracking**: 
   - Identifies downloads based on common file extensions (`.zip`, `.pdf`, `.exe`, etc.).
-  - Separates successful downloads (2xx) from failed attempts (4xx/5xx).
+  - Separates successful downloads (`DL OK`) from failed attempts (`DL Err`).
 - **Error Analysis**: 
   - Total error count and distribution by severity level (error, crit, alert, etc.).
   - Top 5 unique error messages.
 - **Threat Detection (Bad Actors)**: 
   - Identifies potentially malicious IPs based on 403/401/400 errors.
-  - Scores IPs targeting sensitive files (e.g., `.env`, `xmlrpc.php`, `.git`).
+  - Scores IPs targeting sensitive files (e.g., `.env`, `xmlrpc.php`, `wp-admin`, `cgi-bin`, `.git`).
   - Flags IPs triggering critical ModSecurity or Apache errors.
+  - Provides `sudo ufw` ban commands for identified bad actors.
 - **Terminal Visualization**: Uses standard ANSI escape codes for a clean, color-coded table output.
 
 ## Requirements
@@ -38,7 +42,11 @@ A powerful CLI-based tool designed to parse and analyze Apache HTTP Server logs 
 
 ### Quick Start
 
-- Run a detailed report against your local Apache logs directory:
+- Run with default settings (shows **Current Month** summary and **Bad Actors**):
+  ```bash
+  python main.py "/path/to/your/apache/logs"
+  ```
+- Show a full detailed report for the current month:
   ```bash
   python main.py "/path/to/your/apache/logs" -f
   ```
@@ -48,12 +56,12 @@ A powerful CLI-based tool designed to parse and analyze Apache HTTP Server logs 
   ```
 - On Windows, you can also use:
   ```powershell
-  py -3 main.py -f "/path/to/your/apache/logs" 
+  python main.py "C:\path\to\your\apache\logs"
   ```
 
 ## Usage
 
-Run the script by providing the path to a directory containing Apache logs or a specific log file.
+Run the script by providing the path to a directory containing Apache logs or a specific log file. If no arguments are provided, it defaults to the **Current Month** summary and includes the **Top Bad Actors**.
 
 ```bash
 python main.py [path_to_logs] [flags]
@@ -63,25 +71,35 @@ python main.py [path_to_logs] [flags]
 
 | Flag | Long Flag | Description |
 |------|-----------|-------------|
-| `-s` | `--summary` | (Default) Displays a compact summary table of all domains. |
 | `-f` | `--full` | Displays a detailed report with full statistics for each domain. |
+| `-t` | `--total` | Show **Total** period summary. |
+| `-c` | `--current` | Show **Current Month** summary. |
+| `-l` | `--last` | Show **Last Month** summary. |
+| `-b` | `--bad-actors` | Explicitly show bad actors for the selected periods. |
 | `-h` | `--help` | Show the help message and exit. |
+
+*Note: If no period flags (`-t`, `-c`, `-l`) are provided, the tool defaults to the current month.*
 
 ### Examples
 
-**Analyze logs in a specific directory (default summary):**
+**Show current month summary (default):**
 ```bash
 python main.py "./logs/"
 ```
 
-**Generate a detailed report:**
+**Show total summary without bad actors:**
 ```bash
-python main.py "./logs/" -f
+python main.py "./logs/" -t
 ```
 
-**Analyze a single file:**
+**Show total and last month summary with bad actors:**
 ```bash
-python main.py "/var/log/apache2/access.log"
+python main.py "./logs/" -t -l -b
+```
+
+**Generate a detailed report for all periods:**
+```bash
+python main.py "./logs/" -f -t -c -l
 ```
 
 ## Threat Scoring Logic
