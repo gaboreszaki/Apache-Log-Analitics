@@ -21,13 +21,12 @@ A powerful CLI-based tool designed to parse and analyze Apache HTTP Server logs 
   - Identifies potentially malicious IPs based on 403/401/400 errors.
   - Scores IPs targeting sensitive files (e.g., `.env`, `xmlrpc.php`, `.git`).
   - Flags IPs triggering critical ModSecurity or Apache errors.
-- **Terminal Visualization**: Uses `colorama` for a clean, color-coded table output.
+- **Terminal Visualization**: Uses standard ANSI escape codes for a clean, color-coded table output.
 
 ## Requirements
 
 - **Python 3.6+**
 - **Apache HTTP Server Logs**: Standard `access.log` and `error.log` (including compressed `.gz` archives).
-- **Dependencies**: `colorama` (for terminal visualization).
 
 ## Installation
 
@@ -35,12 +34,6 @@ A powerful CLI-based tool designed to parse and analyze Apache HTTP Server logs 
    ```bash
    git clone https://github.com/gaboreszaki/Apache-Log-Analitics
    cd Apache-Log-Analitics
-   ```
-
-2. **Install dependencies**:
-   This tool requires `colorama` for colorized terminal output.
-   ```bash
-   pip install colorama
    ```
 
 ### Quick Start
