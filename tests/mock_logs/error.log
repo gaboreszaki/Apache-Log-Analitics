@@ -1,0 +1,4 @@
+[Wed Apr 08 12:00:00.000000 2026] [error] [pid 1234] [client 5.6.7.8:12345] [hostname "test1.com"] Error message example
+[Wed Apr 08 12:05:00.000000 2026] [crit] [pid 1234] [client 5.6.7.8:12346] AH01630: client denied by server configuration: /var/www/html/wp-admin/index.php
+[Sun Mar 15 12:00:00.000000 2026] [error] [pid 1234] [client 1.2.3.4:12345] Another error message
+[Wed Jan 15 12:00:00.000000 2026] [info] [pid 1234] Just an info message

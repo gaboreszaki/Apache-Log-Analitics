@@ -29,7 +29,7 @@ A powerful CLI-based tool designed to parse and analyze Apache HTTP Server logs 
 
 ## Requirements
 
-- **Python 3.6+**
+- **Python 3.6+** (on some systems use `python3` if Python 2 is also installed)
 - **Apache HTTP Server Logs**: Standard `access.log` and `error.log` (including compressed `.gz` archives).
 
 ## Installation
@@ -44,15 +44,15 @@ A powerful CLI-based tool designed to parse and analyze Apache HTTP Server logs 
 
 - Run with default settings (shows **Current Month** summary and **Bad Actors**):
   ```bash
-  python main.py "/path/to/your/apache/logs"
+  sudo python3 main.py "/path/to/your/apache/logs"
   ```
 - Show a full detailed report for the current month:
   ```bash
-  python main.py "/path/to/your/apache/logs" -f
+  sudo python3 main.py "/path/to/your/apache/logs" -f
   ```
 - Show CLI help:
   ```bash
-  python main.py -h
+  python3 main.py -h
   ```
 - On Windows, you can also use:
   ```powershell
@@ -64,7 +64,7 @@ A powerful CLI-based tool designed to parse and analyze Apache HTTP Server logs 
 Run the script by providing the path to a directory containing Apache logs or a specific log file. If no arguments are provided, it defaults to the **Current Month** summary and includes the **Top Bad Actors**.
 
 ```bash
-python main.py [path_to_logs] [flags]
+sudo python3 main.py [path_to_logs] [flags]
 ```
 
 ### Options
@@ -84,22 +84,22 @@ python main.py [path_to_logs] [flags]
 
 **Show current month summary (default):**
 ```bash
-python main.py "./logs/"
+sudo python3 main.py "./logs/"
 ```
 
 **Show total summary without bad actors:**
 ```bash
-python main.py "./logs/" -t
+sudo python3 main.py "./logs/" -t
 ```
 
 **Show total and last month summary with bad actors:**
 ```bash
-python main.py "./logs/" -t -l -b
+sudo python3 main.py "./logs/" -t -l -b
 ```
 
 **Generate a detailed report for all periods:**
 ```bash
-python main.py "./logs/" -f -t -c -l
+sudo python3 main.py "./logs/" -f -t -c -l
 ```
 
 ## Threat Scoring Logic
