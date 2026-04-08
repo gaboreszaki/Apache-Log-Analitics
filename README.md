@@ -2,8 +2,6 @@
 
 A powerful CLI-based tool designed to parse and analyze Apache HTTP Server logs (access and error logs). It provides a structured, colorized report of web traffic, downloads, errors, and security threats.
 
-Repository: https://github.com/gaboreszaki/Apache-Log-Analitics
-
 ## Features
 
 - **Multi-Log Support**: Automatically detects and processes `access.log` and `error.log` files, including compressed `.gz` archives.
@@ -45,11 +43,11 @@ Repository: https://github.com/gaboreszaki/Apache-Log-Analitics
    pip install colorama
    ```
 
-### Quick Start (with bundled sample logs)
+### Quick Start
 
-- Run a detailed report against the included sample logs directory:
+- Run a detailed report against your local Apache logs directory:
   ```bash
-  python main.py -f "apache log files"
+  python main.py "/path/to/your/apache/logs" -f
   ```
 - Show CLI help:
   ```bash
@@ -57,7 +55,7 @@ Repository: https://github.com/gaboreszaki/Apache-Log-Analitics
   ```
 - On Windows, you can also use:
   ```powershell
-  py -3 main.py -f "apache log files"
+  py -3 main.py -f "/path/to/your/apache/logs" 
   ```
 
 ## Usage
