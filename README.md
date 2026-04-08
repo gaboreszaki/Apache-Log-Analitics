@@ -2,6 +2,8 @@
 
 A powerful CLI-based tool designed to parse and analyze Apache HTTP Server logs (access and error logs). It provides a structured, colorized report of web traffic, downloads, errors, and security threats.
 
+Repository: https://github.com/gaboreszaki/Apache-Log-Analitics
+
 ## Features
 
 - **Multi-Log Support**: Automatically detects and processes `access.log` and `error.log` files, including compressed `.gz` archives.
@@ -33,8 +35,8 @@ A powerful CLI-based tool designed to parse and analyze Apache HTTP Server logs 
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
-   cd CLI-Appache-log-analitics
+   git clone https://github.com/gaboreszaki/Apache-Log-Analitics
+   cd Apache-Log-Analitics
    ```
 
 2. **Install dependencies**:
@@ -42,6 +44,21 @@ A powerful CLI-based tool designed to parse and analyze Apache HTTP Server logs 
    ```bash
    pip install colorama
    ```
+
+### Quick Start (with bundled sample logs)
+
+- Run a detailed report against the included sample logs directory:
+  ```bash
+  python main.py -f "apache log files"
+  ```
+- Show CLI help:
+  ```bash
+  python main.py -h
+  ```
+- On Windows, you can also use:
+  ```powershell
+  py -3 main.py -f "apache log files"
+  ```
 
 ## Usage
 
@@ -90,6 +107,23 @@ The tool produces structured tables with colors:
 - **Green**: Successful requests and access statistics.
 - **Yellow**: Status codes (3xx) and visitor stay warnings.
 - **Red**: Error statistics, failed downloads, and high-threat scores.
+
+## Privacy & Data Handling
+
+- This CLI tool does not collect, store, transmit, or persist any data.
+- No cookies, analytics, telemetry, or external services are used.
+- All processing happens locally on the log files you provide.
+- The tool reads log files in a streaming manner and does not create databases or cache user data.
+
+## GDPR Compliance
+
+This application is designed with **Privacy by Design** principles to assist users in staying GDPR compliant when analyzing web server logs.
+
+- **Data Processing**: The tool processes Apache log files, which may contain **Personal Data** such as IP addresses.
+- **Local Execution**: All processing occurs strictly on the user's local machine. No data is ever transmitted to external servers, APIs, or third-party services.
+- **No Persistence**: The application does not store, save, or cache any personal data extracted from the logs. All analysis results are stored in volatile memory (RAM) and are cleared once the process terminates.
+- **User Responsibility**: As the operator of the tool, you are the **Data Controller** for any logs you analyze. You should ensure that you have a legal basis for processing the log data and that you handle the output (e.g., terminal screens or redirected output files) in accordance with GDPR requirements.
+- **Security**: The tool does not modify the original log files, ensuring data integrity is maintained.
 
 ---
 *Note: If no path is provided, the script attempts to look for logs in common Linux locations like `/var/log/apache2/`.*
